@@ -97,19 +97,52 @@ async function getInfo(userMon)
     else
     {
         let evoChain = await evoData.json()
+        let evolutions = evoChain.chain
 
-        
 
-        for (let i = 0; i < evoChain.chain.evolves_to.length; i++)
-            {
-                const personItem = document.createElement('P');
-                personItem.innerText = evoChain.chain[i].species.name
-                pmEvolutions.appendChild(personItem)
+        if (!evolutions.evolves_to.length)
+        {
+            const personItem = document.createElement('P');
+            personItem.innerText = "N/A"
+            pmEvolutions.appendChild(personItem)
+        }
+        else
+        {
+            // sets the first pokemon in the three
+            const baseForm = document.createElement('p');
+            baseForm.innerText = evolutions.species.name;
+            baseForm.addEventListener('click', () => {
+                getInfo(evolutions.species.name)
+            });
+            pmEvolutions.appendChild(baseForm);
 
-            }
+            console.log(evolutions)
+            // used for each loops since I only need the name inside, not modify it
+            // iterates trough the nested evolves_to thats inside the the first pokemon
+            for (let firstEvo of evolutions.evolves_to)
+                {
+                    const firstEvoItem = document.createElement('p');
+                    firstEvoItem.innerText = firstEvo.species.name;
+                    firstEvoItem.addEventListener('click', () => {
+                        getInfo(firstEvo.species.name)
+                    });
+                    pmEvolutions.appendChild(firstEvoItem);
 
+                    // iterates trough the nested evolves_to thats inside the the evolved pokemon
+                    for (let secondEvo of firstEvo.evolves_to)
+                    {
+                        const secondEvoItem = document.createElement('p');
+                        secondEvoItem.innerText = secondEvo.species.name;
+                        secondEvoItem.addEventListener('click', () => {
+                            getInfo(secondEvo.species.name)
+                        });
+                        pmEvolutions.appendChild(secondEvoItem);
+                    }
+                }
+                
+
+        }
     }
-
 
 }
 
