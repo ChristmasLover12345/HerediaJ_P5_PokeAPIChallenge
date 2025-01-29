@@ -16,7 +16,7 @@ let isShiny = false;
 let shinyUrl = ""
 let normalUrl = ""
 
-let 
+let random
 
 // Fetches
 async function pokemonFetch(userSearch)
