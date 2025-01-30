@@ -87,6 +87,7 @@ async function getInfo(userMon)
     let evoData = await fetch(speciesChain.evolution_chain.url)
     pmEvolutions.innerHTML = ""
 
+    // Checks that evo data exists
     if(!evoData.ok)
     {
         
@@ -99,7 +100,7 @@ async function getInfo(userMon)
         let evoChain = await evoData.json()
         let evolutions = evoChain.chain
 
-
+        // checks if there's evolutions
         if (!evolutions.evolves_to.length)
         {
             const personItem = document.createElement('P');
@@ -128,7 +129,7 @@ async function getInfo(userMon)
                     });
                     pmEvolutions.appendChild(firstEvoItem);
 
-                    // iterates trough the nested evolves_to thats inside the the evolved pokemon
+                    // iterates trough the nested evolves_to thats inside the evolved pokemon
                     for (let secondEvo of firstEvo.evolves_to)
                     {
                         const secondEvoItem = document.createElement('p');
@@ -143,6 +144,20 @@ async function getInfo(userMon)
 
         }
     }
+
+    for (let pokemonMoves of pokeInfo.moves)
+    {
+        const moveItem = document.createElement('p');
+        moveItem.innerText = pokemonMoves.move.name;
+        pmMoves.appendChild(moveItem)
+    }
+
+    for (let pokemonAbilities of pokeInfo.abilities)
+        {
+            const moveItem = document.createElement('p');
+            moveItem.innerText = pokemonAbilities.ability.name;
+            pmAbilities.appendChild(moveItem)
+        }
 
 }
 
