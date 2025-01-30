@@ -145,6 +145,10 @@ async function getInfo(userMon)
         }
     }
 
+    pmMoves.innerHTML = "";
+    pmAbilities.innerHTML = "";
+
+    //  Move fetch
     for (let pokemonMoves of pokeInfo.moves)
     {
         const moveItem = document.createElement('p');
@@ -152,6 +156,7 @@ async function getInfo(userMon)
         pmMoves.appendChild(moveItem)
     }
 
+    // Abilitie fetch
     for (let pokemonAbilities of pokeInfo.abilities)
         {
             const moveItem = document.createElement('p');
