@@ -1,4 +1,4 @@
-/* Wrote the button styles  */
+/* Wrote the evo button styles here so it doesnt clog up the script*/
 #pmEvolutions p
 {
 background-color: #BF0606;
@@ -14,5 +14,20 @@ max-width: 150px;
 max-height: 60px;
 text-align: center;
 border-radius: 5px;
+
+}
+
+/* Same for the favorites */
+
+#favorites div
+{
+
+    background-color:#D9D9D9 ;
+    display: flex;
+    width: 95%;
+    height: 80px;
+    justify-content: space-between;
+    border-radius: 5px;
+    border: solid black 2px;
 
 }

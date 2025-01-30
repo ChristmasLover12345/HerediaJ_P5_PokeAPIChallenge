@@ -1,3 +1,4 @@
+import { getFav, saveFav, removeFav } from "./localStorage.js"
 
 let pmImg = document.getElementById("pmImg")
 let pmName = document.getElementById("pmName")
@@ -6,10 +7,11 @@ let pmLocation = document.getElementById("pmLocation")
 let pmMoves = document.getElementById("pmMoves")
 let pmAbilities = document.getElementById("pmAbilities")
 let pmEvolutions = document.getElementById("pmEvolutions")
+let favorites = document.getElementById("favorites")
 
 let addFavBtn = document.getElementById("addFavBtn")
 let shinyBtn = document.getElementById("shinyBtn")
-let favBtn = document.getElementById("favBtn")
+let favDropBtn = document.getElementById("favDropBtn")
 let randomBtn = document.getElementById("randomBtn")
 let searchBar = document.getElementById("searchBar")
 
@@ -36,6 +38,42 @@ async function pokemonFetch(userSearch)
     return data;
 }
 
+function makeFavs()
+{
+    favorites.innerHTML = ""
+
+    let favsArr = getFav()
+    
+    for (let pokemon of favsArr)
+    {
+
+        let favContainer = document.createElement('div')
+        let favoriteName = document.createElement('p')
+        let removeFavBtn = document.createElement('p')
+
+        favoriteName.innerText = pokemon
+        removeFavBtn.innerText = "X"
+
+        removeFavBtn.classList.add("border-s-2", "text-[#FF1E1E]", "h-full", "m-0", "text-[40px]", "px-[5px]", "self-center")
+        favoriteName.classList.add("text-black", "text-[40px]", "m-0", "text-ellipsis", "h-full", "self-center")
+
+        removeFavBtn.addEventListener('click', () => {
+            removeFav(pokemon);
+            makeFavs()
+        })
+
+        favoriteName.addEventListener('click', () => {
+            getInfo(pokemon)
+        })
+
+        favorites.appendChild(favContainer)
+        favContainer.appendChild(favoriteName)
+        favContainer.appendChild(removeFavBtn)
+
+
+    }
+
+}
 
 
 // Logic
@@ -51,7 +89,7 @@ async function getInfo(userMon)
     else
     {
         // Saving the current pokemon in case it's added to favorites
-        currentPokemon = userMon;
+        currentPokemon = pokeInfo.name;
     }
 
     // Basic info
@@ -166,7 +204,7 @@ async function getInfo(userMon)
 
 }
 
-// Event listeners
+// search bar
 searchBar.addEventListener("keydown", (event) => {
     if (event.key ==="Enter")
     {   
@@ -175,12 +213,14 @@ searchBar.addEventListener("keydown", (event) => {
     }
 })
 
+// random
 randomBtn.addEventListener('click', () => {
 
     getInfo(rng(0, 649))
 
 })
 
+// shiny toggle
 shinyBtn.addEventListener('click', () => {
     
     if (!isShiny)
@@ -196,4 +236,18 @@ shinyBtn.addEventListener('click', () => {
 
 })
 
+// add to fav button
+addFavBtn.addEventListener('click', () => {
 
+saveFav(currentPokemon);
+makeFavs()
+
+});
+
+// fav dropdown
+favDropBtn.addEventListener('click', () => {
+    // add the dropdown toggle here once you make it
+})
+
+
+makeFavs()
