@@ -6,7 +6,8 @@
 
  // made a site that lets you look up and display pokemon from gens 1 - 5 and their respective evolutions
 
-// Peer reviewed by:
+// Peer reviewed by: robert g
+- looks good 
 
 
 
