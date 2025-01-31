@@ -8,6 +8,7 @@ let pmMoves = document.getElementById("pmMoves")
 let pmAbilities = document.getElementById("pmAbilities")
 let pmEvolutions = document.getElementById("pmEvolutions")
 let favorites = document.getElementById("favorites")
+let dropdown = document.getElementById("dropdown")
 
 let addFavBtn = document.getElementById("addFavBtn")
 let shinyBtn = document.getElementById("shinyBtn")
@@ -27,6 +28,10 @@ const rng = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
   }
 
+// fav dropdown
+favDropBtn.addEventListener('click', () => {
+    dropdown.classList.toggle("hidden")
+})
 
 
 // Fetches
@@ -38,12 +43,15 @@ async function pokemonFetch(userSearch)
     return data;
 }
 
+// Generate favorites
 function makeFavs()
 {
+    // Clear up any previous favs
     favorites.innerHTML = ""
-
+    // self explanatory
     let favsArr = getFav()
     
+    // iterate tr
     for (let pokemon of favsArr)
     {
 
@@ -83,7 +91,9 @@ async function getInfo(userMon)
     // checking if gen is 1 - 5
     if (pokeInfo.id > 649)
     {
-    alert("Only gen 1 - 5")
+    pmName.innerText = "gen 1 - 5 only"
+    pmLocation.innerText = "gen 1 - 5 only"
+    pmElement.innerText = "gen 1 - 5 only"
     return
     }
     else
@@ -123,6 +133,7 @@ async function getInfo(userMon)
     let speciesData = await fetch(pokeInfo.species.url)
     let speciesChain = await speciesData.json()
     let evoData = await fetch(speciesChain.evolution_chain.url)
+    console.log(evoData)
     pmEvolutions.innerHTML = ""
 
     // Checks that evo data exists
@@ -244,10 +255,6 @@ makeFavs()
 
 });
 
-// fav dropdown
-favDropBtn.addEventListener('click', () => {
-    // add the dropdown toggle here once you make it
-})
 
 
 makeFavs()

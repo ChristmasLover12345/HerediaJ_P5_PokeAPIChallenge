@@ -7,8 +7,51 @@
     <link rel="stylesheet" href="./Src/output.css">
     <link rel="stylesheet" href="./Src/styles.css">
 </head>
-<body class="">
+<body class="bg-[#FF0000] h-screen w-screen grid grid-cols-[5%_90%_5%] grid-rows-[15%_auto_3%]" >
 
+<div class="w-full h-full col-start-2 flex flex-col justify-center">
+
+<button id="randomBtn" class="bg-[#BF0606] text-white text-center w-[90%] self-center h-[40px] rounded-[5px] mb-1">Random</button>
+    <div class="w-[90%] h-[40px] mb-1 self-center relative inline-block">
+
+        <button id="favDropBtn" class="w-full h-full bg-[#BF0606] text-center rounded-[5px] text-white">Favorites</button>
+        <!-- Ask for hekp on the dropdown so it fills up even if empty -->
+        <div id="dropdown" class="hidden absolute flex justify-center left-[-5%] z-10 rounded-[5px] min-h-[200px] min-w-[110%]  max-h-[300px] bg-[#BF0606]">
+
+                <div id="favorites" class="border-[4px] rounded-[5px] border-white bg-[#98CB98] min-h-[97%] min-w-[97%] h-[97%] w-[97%] overflow-x-scroll flex flex-col flex-grow items-center justify-center">
+
+                   
+
+                </div>
+
+        </div>
+
+    </div>
+
+    <input id="searchBar" placeholder="text" type="text" class="bg-white border-2 rounded-[5px] text-center text-[30px] border-[#BF0606] w-[90%] h-[40px] self-center">
+
+    </div>
+
+
+<!-- Screen -->
+<div class="h-full w-full col-start-2 row-start-2 border-[12px] rounded-[5px] border-white bg-[#98CB98] relative overflow-hidden">
+
+    <div class="scanline"></div>
+    
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- 
 <img id="pmImg" class="h-[200px] w-[200px]" src="" alt="pokemon img">
 <br>
 <button id="shinyBtn" class="border-2 active:border-green-400">Shiny</button>
@@ -42,7 +85,7 @@
 <br>
 <button id="randomBtn" class="border-2 active:border-green-400">Random</button>
 <br>
-<input id="searchBar" class="border-2" placeholder="search" type="text">
+<input id="searchBar" class="border-2" placeholder="search" type="text"> -->
 
 
 
