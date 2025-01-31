@@ -39,7 +39,7 @@ async function pokemonFetch(userSearch)
 {
     let promise = await fetch(`https://pokeapi.co/api/v2/pokemon/${userSearch}`);
     let data = await promise.json();
-    console.log(data)
+    
     return data;
 }
 
@@ -63,7 +63,7 @@ function makeFavs()
         removeFavBtn.innerText = "X"
 
         removeFavBtn.classList.add("border-s-2", "text-[#FF1E1E]", "h-full", "m-0", "text-[40px]", "px-[5px]", "self-center")
-        favoriteName.classList.add("text-black", "text-[40px]", "m-0", "text-ellipsis", "h-full", "self-center")
+        favoriteName.classList.add("text-black", "text-[40px]", "m-0", "truncate", "h-full", "self-center", "w-full")
 
         removeFavBtn.addEventListener('click', () => {
             removeFav(pokemon);
@@ -94,6 +94,9 @@ async function getInfo(userMon)
     pmName.innerText = "gen 1 - 5 only"
     pmLocation.innerText = "gen 1 - 5 only"
     pmElement.innerText = "gen 1 - 5 only"
+    pmImg.src = "./Assets/king-von-rapper.gif"
+    pmAbilities.innerHTML = ""
+    pmMoves.innerHTML = ""
     return
     }
     else
@@ -133,7 +136,6 @@ async function getInfo(userMon)
     let speciesData = await fetch(pokeInfo.species.url)
     let speciesChain = await speciesData.json()
     let evoData = await fetch(speciesChain.evolution_chain.url)
-    console.log(evoData)
     pmEvolutions.innerHTML = ""
 
     // Checks that evo data exists
@@ -161,18 +163,19 @@ async function getInfo(userMon)
             // sets the first pokemon in the three
             const baseForm = document.createElement('p');
             baseForm.innerText = evolutions.species.name;
+            baseForm.classList.add("text-[20px]", "md:text-[25px]", "lg:text-[30px]")
             baseForm.addEventListener('click', () => {
                 getInfo(evolutions.species.name)
             });
             pmEvolutions.appendChild(baseForm);
 
-            console.log(evolutions)
             // used for each loops since I only need the name inside, not modify it
             // iterates trough the nested evolves_to thats inside the the first pokemon
             for (let firstEvo of evolutions.evolves_to)
                 {
                     const firstEvoItem = document.createElement('p');
                     firstEvoItem.innerText = firstEvo.species.name;
+                    firstEvoItem.classList.add("text-[20px]", "md:text-[25px]", "lg:text-[30px]")
                     firstEvoItem.addEventListener('click', () => {
                         getInfo(firstEvo.species.name)
                     });
@@ -183,6 +186,7 @@ async function getInfo(userMon)
                     {
                         const secondEvoItem = document.createElement('p');
                         secondEvoItem.innerText = secondEvo.species.name;
+                        secondEvoItem.classList.add("text-[20px]", "md:text-[25px]", "lg:text-[30px]")
                         secondEvoItem.addEventListener('click', () => {
                             getInfo(secondEvo.species.name)
                         });
@@ -221,6 +225,7 @@ searchBar.addEventListener("keydown", (event) => {
     {   
         isShiny = false
         getInfo(searchBar.value)
+        shinyBtn.innerText = "Shiny"
     }
 })
 
@@ -228,6 +233,9 @@ searchBar.addEventListener("keydown", (event) => {
 randomBtn.addEventListener('click', () => {
 
     getInfo(rng(0, 649))
+    isShiny = false
+    shinyBtn.innerText = "Shiny"
+    
 
 })
 
@@ -237,11 +245,13 @@ shinyBtn.addEventListener('click', () => {
     if (!isShiny)
     {
         isShiny = true
+        shinyBtn.innerText = "Normal"
         pmImg.src = shinyUrl
     }
     else if (isShiny)
     {
         isShiny = false
+        shinyBtn.innerText = "Shiny"
         pmImg.src = normalUrl
     }
 
@@ -255,6 +265,9 @@ makeFavs()
 
 });
 
+getInfo(rng(0, 649))
+isShiny = false
+shinyBtn.innerText = "Shiny"
 
 
 makeFavs()
