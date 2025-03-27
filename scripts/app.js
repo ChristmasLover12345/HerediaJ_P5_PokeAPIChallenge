@@ -119,7 +119,7 @@ async function getInfo(userMon)
     {pmLocation.innerText = locations[rng(0, (locations.length - 1))].location_area.name}
 
     // display the elements
-    
+    console.log(pokeInfo.types)
     let typeArr = [];
     for (let i = 0; i < pokeInfo.types.length; i++)
     {
