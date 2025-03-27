@@ -22,17 +22,16 @@ let normalUrl = ""
 let currentPokemon = ""
 
 const rng = (min, max) => {
-    min = Math.ceil(min)
+  min = Math.ceil(min)
   max = Math.floor(max)
 
   return Math.floor(Math.random() * (max - min + 1)) + min
-  }
+}
 
 // fav dropdown
 favDropBtn.addEventListener('click', () => {
     dropdown.classList.toggle("hidden")
 })
-
 
 // Fetches
 async function pokemonFetch(userSearch)
@@ -83,7 +82,6 @@ function makeFavs()
 
 }
 
-
 // Logic
 async function getInfo(userMon)
 {
@@ -121,6 +119,7 @@ async function getInfo(userMon)
     {pmLocation.innerText = locations[rng(0, (locations.length - 1))].location_area.name}
 
     // display the elements
+    
     let typeArr = [];
     for (let i = 0; i < pokeInfo.types.length; i++)
     {
@@ -208,6 +207,8 @@ async function getInfo(userMon)
         moveItem.innerText = pokemonMoves.move.name;
         pmMoves.appendChild(moveItem)
     }
+    console.log(pokeInfo.moves)
+    console.log(pokeInfo.abilities)
 
     // Abilitie fetch
     for (let pokemonAbilities of pokeInfo.abilities)
