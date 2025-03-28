@@ -135,6 +135,7 @@ async function getInfo(userMon)
     let speciesData = await fetch(pokeInfo.species.url)
     let speciesChain = await speciesData.json()
     let evoData = await fetch(speciesChain.evolution_chain.url)
+    console.log(evoData)
     pmEvolutions.innerHTML = ""
 
     // Checks that evo data exists
